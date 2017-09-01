@@ -17,7 +17,8 @@ jobs:
 
   deploy:
     working_directory: ~/classivo
-    machine: true
+    docker:
+      - image: angular/ngcontainer
     steps:
       - checkout
       - run: npm install --production
