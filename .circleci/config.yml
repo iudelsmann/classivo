@@ -21,7 +21,13 @@ jobs:
       - image: angular/ngcontainer
     steps:
       - checkout
-      - run: npm install --production
+      - restore_cache:
+          key: classivo-{{ .Branch }}-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: classivo-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - "node_modules"
       - run: npm run build -- --prod
       - run: npm run deploy -- --token=$FIREBASE_TOKEN --non-interactive
 
