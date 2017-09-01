@@ -17,9 +17,7 @@ jobs:
 
   deploy:
     working_directory: ~/classivo
-    branch: master
-    docker:
-      - image: angular/ngcontainer
+    machine: true
     steps:
       - checkout
       - run: npm install --production
@@ -34,3 +32,6 @@ workflows:
       - deploy:
         requires:
           - build
+        filters:
+          branches:
+            only: master
