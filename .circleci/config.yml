@@ -14,3 +14,22 @@ jobs:
           paths:
             - "node_modules"
       - run: npm run lint
+
+  deploy:
+    working_directory: ~/classivo
+    branch: master
+    docker:
+      - image: angular/ngcontainer
+    steps:
+      - checkout
+      - run: npm install --production
+      - run: npm run deploy -- --token=$FIREBASE_TOKEN --non-interactive
+
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - build
+      - deploy:
+        requires:
+          - build
