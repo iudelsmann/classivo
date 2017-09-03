@@ -28,7 +28,7 @@ jobs:
           key: classivo-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - "node_modules"
-      - run: npm run build -- --prod
+      - run: npm run build -- --prod --no-progress
       - run: npm run deploy -- --token=$FIREBASE_TOKEN --non-interactive
 
 workflows:
