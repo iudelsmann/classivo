@@ -3,7 +3,7 @@
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="hello" datatype="html">
-        <source>Hello!</source>
+        <source>Olá!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/home/home.component.ts</context>
           <context context-type="linenumber">9</context>
