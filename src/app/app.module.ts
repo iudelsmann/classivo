@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { MdCardModule, MdButtonModule, MdIconModule, MdToolbarModule } from '@angular/material';
+import { MdCardModule, MdButtonModule, MdIconModule, MdToolbarModule, MdSidenavModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AngularFireModule } from 'angularfire2';
@@ -39,6 +39,7 @@ const appRoutes: Routes = [
     MdIconModule,
     MdToolbarModule,
     FlexLayoutModule,
+    MdSidenavModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
