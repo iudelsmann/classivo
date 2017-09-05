@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  classes: FirebaseListObservable<any>;
 
-  constructor() { }
+  constructor(db: AngularFireDatabase) {
+    this.classes = db.list('/classes');
+  }
 
   ngOnInit() {
+    this.classes.forEach((val) => {
+      console.log(val);
+    });
   }
 
 }

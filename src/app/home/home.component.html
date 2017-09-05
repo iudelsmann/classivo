@@ -1,14 +1,22 @@
-<md-sidenav-container fullscreen style="position: fixed">
-  <md-toolbar color="primary">
-    <button md-icon-button (click)="sidenav.open()">
-      <md-icon>menu</md-icon>
-    </button>
+<div class="fixed-toolbar-container">
+  <md-sidenav-container style="height:100%;width:100%;">
+    <md-sidenav #sidenav style="width: 200px">
+      <span i18n="@@hello">Olá!</span>
+    </md-sidenav>
 
-  </md-toolbar>
-  <md-sidenav #sidenav style="width: 200px">
-    <span i18n="@@hello">Olá!</span>
-  </md-sidenav>
-</md-sidenav-container>
-<div style="height: 200vh">
+    <md-toolbar color="primary">
+      <button md-icon-button (click)="sidenav.open()">
+        <md-icon>menu</md-icon>
+      </button>
+    </md-toolbar>
 
+    <div class="inner-sidenav-content">
+      <div style="height: 200vh">
+        <div *ngFor="let class of classes | async">
+          <span>Hola</span>
+          <span>{{ class.name }}</span>
+        </div>
+      </div>
+    </div>
+  </md-sidenav-container>
 </div>

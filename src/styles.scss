@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  background-color: #EEE;
+}
+
+/* Fixes the toolbar at the top of the page */
+.fixed-toolbar-container {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+/* Also to fix the toolbar at the top */
+.inner-sidenav-content {
+  overflow: auto;
+  position: absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  top:64px;
+}
