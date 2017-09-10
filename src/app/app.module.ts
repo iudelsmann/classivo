@@ -2,14 +2,28 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { MdCardModule, MdButtonModule, MdIconModule, MdToolbarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MdCardModule,
+  MdButtonModule,
+  MdIconModule,
+  MdToolbarModule,
+  MdSidenavModule,
+  MdDialogModule,
+  MdInputModule,
+  MdFormFieldModule,
+  MdProgressBarModule,
+  MdSnackBarModule,
+} from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { AddCourseDialogComponent } from './home/add-course-dialog.component';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
@@ -27,18 +41,31 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     LoginComponent,
+    AddCourseDialogComponent,
+  ],
+  entryComponents: [
+    AddCourseDialogComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
     AngularFireAuthModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
     MdCardModule,
     MdButtonModule,
     MdIconModule,
     MdToolbarModule,
-    FlexLayoutModule,
+    MdSidenavModule,
+    MdDialogModule,
+    MdInputModule,
+    MdFormFieldModule,
+    MdProgressBarModule,
+    MdSnackBarModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

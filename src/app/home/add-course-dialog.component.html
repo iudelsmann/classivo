@@ -1,0 +1,11 @@
+<h1 md-dialog-title i18n>Nova disciplina</h1>
+<form [formGroup]="courseForm" (ngSubmit)="save()">
+  <div md-dialog-content>
+    <md-form-field>
+      <input formControlName="name" mdInput placeholder="Nome" name="name" [(ngModel)]="course.name" tabindex="1" required>
+    </md-form-field>
+  </div>
+  <div md-dialog-actions>
+    <button type="submit" md-button tabindex="2" i18n>Salvar</button>
+  </div>
+</form>
