@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
 
+import { BaseComponent } from '../base/base-component';
 import { Course } from '../model/course';
 
 @Component({
@@ -42,22 +43,6 @@ export class HomeComponent implements OnInit {
    */
   createCourse() {
     const dialogRef = this.dialog.open(AddCourseDialogComponent);
-
-    dialogRef.afterClosed().subscribe(course => {
-      if (course) {
-        this.addCourse(course);
-      }
-    });
-  }
-
-  /**
-   * Adds a new course to the database.
-   *
-   * @param {Course} course the new course to add
-   * @memberof HomeComponent
-   */
-  addCourse(course: Course) {
-    this.courses.push(course);
   }
 }
 
@@ -65,7 +50,7 @@ export class HomeComponent implements OnInit {
   selector: 'app-add-course-dialog',
   templateUrl: './add-course-dialog.component.html',
 })
-export class AddCourseDialogComponent {
+export class AddCourseDialogComponent extends BaseComponent {
   /**
    * The course object to bind form inputs.
    *
@@ -83,7 +68,13 @@ export class AddCourseDialogComponent {
   private courseForm: FormGroup;
 
   constructor(
-    public dialogRef: MdDialogRef<AddCourseDialogComponent>, formBuilder: FormBuilder) {
+    public dialogRef: MdDialogRef<AddCourseDialogComponent>,
+    formBuilder: FormBuilder,
+    private db: AngularFireDatabase,
+    snackbar: MdSnackBar,
+  ) {
+    super(snackbar);
+
     this.course = { name: undefined };
 
     this.courseForm = formBuilder.group({
@@ -96,9 +87,14 @@ export class AddCourseDialogComponent {
    *
    * @memberof AddCourseDialogComponent
    */
-  save() {
-    if (this.courseForm.valid) {
-      this.dialogRef.close(this.course);
+  async save() {
+    try {
+      if (this.courseForm.valid) {
+        await this.db.list('/courses').push(this.course);
+        this.dialogRef.close();
+      }
+    } catch (error) {
+      this.showError(error.message);
     }
   }
 }
