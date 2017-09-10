@@ -11,11 +11,13 @@
     </md-toolbar>
 
     <div class="inner-sidenav-content">
-      <div style="height: 200vh">
-        <div *ngFor="let class of classes | async">
-          <span>Hola</span>
-          <span>{{ class.name }}</span>
-        </div>
+      <div fxLayout="row" fxLayoutWrap fxLayoutAlign="space-between" style="padding: 0 20px">
+        <md-card *ngFor="let class of classes | async" fxFlex.xs=100 fxFlex.sm=48 fxFlex.md=32 fxFlex.gt-md=24 style="margin: 10px 0">
+          <md-card-title-group>
+            <md-card-title>{{ class.name }}</md-card-title>
+          </md-card-title-group>
+          <md-card-content>Hola</md-card-content>
+        </md-card>
       </div>
     </div>
   </md-sidenav-container>

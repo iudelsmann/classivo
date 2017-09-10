@@ -13,10 +13,6 @@ export class HomeComponent implements OnInit {
     this.classes = db.list('/classes');
   }
 
-  ngOnInit() {
-    this.classes.forEach((val) => {
-      console.log(val);
-    });
-  }
+  ngOnInit() { }
 
 }
