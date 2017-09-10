@@ -19,8 +19,18 @@ export class HomeComponent implements OnInit {
    */
   public courses: FirebaseListObservable<Course[]>;
 
+  /**
+   * Flag to indicate if the courses are still loading;
+   *
+   * @private
+   * @type {boolean}
+   * @memberof HomeComponent
+   */
+  private loading = true;
+
   constructor(private db: AngularFireDatabase, private dialog: MdDialog) {
     this.courses = db.list('/courses');
+    this.courses.subscribe(() => this.loading = false);
   }
 
   ngOnInit() { }

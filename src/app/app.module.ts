@@ -13,6 +13,7 @@ import {
   MdDialogModule,
   MdInputModule,
   MdFormFieldModule,
+  MdProgressBarModule,
 } from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2';
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
     MdDialogModule,
     MdInputModule,
     MdFormFieldModule,
+    MdProgressBarModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
