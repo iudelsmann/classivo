@@ -51,6 +51,7 @@ export class AddCourseDialogComponent extends BaseComponent {
     try {
       if (this.courseForm.valid) {
         await this.db.list('/courses').push(this.course);
+        this.showMessage('Disiplina adicionada com sucesso');
         this.dialogRef.close();
       }
     } catch (error) {

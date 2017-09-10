@@ -21,4 +21,16 @@ export class BaseComponent {
       snackbarRef.dismiss();
     });
   }
+
+  /**
+   * Shows a snackbar with a simple message and no action. Closes after 3 seconds.
+   *
+   * @param {string} message the mssage to display in the snackbar
+   * @memberof BaseComponent
+   */
+  showMessage(message: string) {
+    this.snackbar.open(message, null, {
+      duration: 3000,
+    });
+  }
 }
