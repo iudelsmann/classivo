@@ -12,7 +12,7 @@
 
     <div class="inner-sidenav-content">
       <div fxLayoutWrap class="class-container">
-        <md-card *ngFor="let class of classes | async" ngStyle.xs="width: 100%">
+        <md-card *ngFor="let class of courses | async" ngStyle.xs="width: 100%">
           <md-card-title-group>
             <md-card-title>{{ class.name }}</md-card-title>
           </md-card-title-group>
@@ -20,6 +20,6 @@
         </md-card>
       </div>
     </div>
-    <button class="bottom-right" md-fab color="warn"><md-icon>add</md-icon></button>
+    <button class="bottom-right" md-fab color="warn" (click)="createCourse()"><md-icon>add</md-icon></button>
   </md-sidenav-container>
 </div>
