@@ -13,7 +13,7 @@ jobs:
           key: classivo-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - "node_modules"
-      - run: npm run lint
+      - run: npm run lint -- --type-check
 
   deploy:
     working_directory: ~/classivo
