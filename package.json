@@ -1,6 +1,8 @@
 {
   "name": "classivo",
   "version": "0.0.0",
+  "description": "Classroom app built using Angular2 and Firebase",
+  "author": "Ivo Udelsmann",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

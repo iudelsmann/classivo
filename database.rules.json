@@ -1,6 +1,17 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+    "users": {
+      "$user_id": {
+        ".read": "auth != null && $user_id == auth.uid",
+        ".write": "auth != null && $user_id == auth.uid"
+      }
+    },
+    "courses": {
+      ".read": "auth != null",
+      "$course_id": {
+        ".read": "auth != null",
+        ".write": "!data.exists() || root.child('users').child(auth.uid).child('courses').child($course_id).exists()"
+      }
+    }
   }
 }

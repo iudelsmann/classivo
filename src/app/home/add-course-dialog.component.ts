@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { MdDialogRef, MdSnackBar } from '@angular/material';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/first';
 
 import { BaseComponent } from '../base/base-component';
 import { Course } from '../model/course';
@@ -32,6 +35,7 @@ export class AddCourseDialogComponent extends BaseComponent {
     formBuilder: FormBuilder,
     private db: AngularFireDatabase,
     snackbar: MdSnackBar,
+    private afAuth: AngularFireAuth,
   ) {
     super(snackbar);
 
@@ -50,8 +54,15 @@ export class AddCourseDialogComponent extends BaseComponent {
   async save() {
     try {
       if (this.courseForm.valid) {
-        await this.db.list('/courses').push(this.course);
-        this.showMessage('Disiplina adicionada com sucesso');
+        // Saves the new course, does not wait for write to finnish
+        const courseRef = this.db.list('/courses').push(this.course);
+
+        // Gets the logged in user
+        const user = await this.afAuth.authState.first().toPromise();
+
+        // Saves the course in the users courses list and waits for both writes to complete.
+        await Promise.all([this.db.object(`/users/${user.uid}/courses/${courseRef.key}`).set(true), courseRef]);
+        this.showMessage('Disciplina adicionada com sucesso');
         this.dialogRef.close();
       }
     } catch (error) {
