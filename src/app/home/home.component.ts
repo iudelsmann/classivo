@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { MdDialog } from '@angular/material';
+import { AngularFireAuth } from 'angularfire2/auth';
+import 'rxjs/add/operator/mergeMap';
 
 import { AddCourseDialogComponent } from './add-course-dialog.component';
 import { Course } from '../model/course';
@@ -28,9 +30,13 @@ export class HomeComponent implements OnInit {
    */
   public loading = true;
 
-  constructor(db: AngularFireDatabase, private dialog: MdDialog) {
-    this.courses = db.list('/courses');
-    this.courses.subscribe(() => this.loading = false);
+  constructor(db: AngularFireDatabase, private dialog: MdDialog, afAuth: AngularFireAuth) {
+    afAuth.authState.flatMap((user) => {
+      this.courses = db.list(`/users/${user.uid}/courses`);
+      return this.courses;
+    }).subscribe((courses) => {
+      this.loading = false;
+    });
   }
 
   ngOnInit() { }

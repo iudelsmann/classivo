@@ -12,4 +12,9 @@ export interface Course {
    * @memberof Course
    */
   name: string;
+
+  /**
+   * Collection of members of the course.
+   */
+  members?: object;
 }
