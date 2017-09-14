@@ -14,6 +14,14 @@ export interface Course {
   name: string;
 
   /**
+   * Description of the course.
+   *
+   * @type {string}
+   * @memberof Course
+   */
+  description: string;
+
+  /**
    * Collection of members of the course.
    */
   members?: object;

@@ -13,9 +13,10 @@
 
     <div class="inner-sidenav-content">
       <div fxLayoutWrap class="class-container">
-        <md-card *ngFor="let class of courses | async" ngStyle.xs="width: 100%">
+        <md-card *ngFor="let course of courses | async" ngStyle.xs="width: 100%">
           <md-card-title-group>
-            <md-card-title>{{ class.name }}</md-card-title>
+            <md-card-title>{{ course.name }}</md-card-title>
+            <md-card-subtitle>{{ course.description }}</md-card-subtitle>
           </md-card-title-group>
           <md-card-content>Hola</md-card-content>
         </md-card>

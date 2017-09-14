@@ -44,11 +44,12 @@ export class AddCourseDialogComponent extends BaseComponent {
   ) {
     super(snackbar);
 
-    this.course = { name: undefined, members: {} };
+    this.course = { name: undefined, description: undefined, members: {} };
     this.user = afAuth.authState;
 
     this.courseForm = formBuilder.group({
       name: [null, Validators.required],
+      description: [null, Validators.required],
     });
   }
 
