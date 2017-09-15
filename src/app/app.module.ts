@@ -16,6 +16,7 @@ import {
   MdProgressBarModule,
   MdSnackBarModule,
 } from '@angular/material';
+import 'hammerjs';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -24,14 +25,15 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AddCourseDialogComponent } from './home/add-course-dialog.component';
-import { environment } from '../environments/environment';
+import { CourseComponent } from './course/course.component';
 import { LoginComponent } from './login/login.component';
+import { environment } from '../environments/environment';
 import { AuthGuard } from './auth.guard';
-import 'hammerjs';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'course/:id', component: CourseComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];
@@ -42,6 +44,7 @@ const appRoutes: Routes = [
     HomeComponent,
     LoginComponent,
     AddCourseDialogComponent,
+    CourseComponent,
   ],
   entryComponents: [
     AddCourseDialogComponent,

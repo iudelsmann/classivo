@@ -10,7 +10,7 @@
       ".read": "auth != null",
       "$course_id": {
         ".read": "auth != null",
-        ".write": "!data.exists() || root.child('users').child(auth.uid).child('courses').child($course_id).exists()"
+        ".write": "!data.exists() || data.child('members').child(auth.uid).exists()"
       }
     }
   }

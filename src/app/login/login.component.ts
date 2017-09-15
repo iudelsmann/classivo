@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-
-
-export class User {
-  constructor(public username: string, public password: string) { }
-}
 
 @Component({
   selector: 'app-login',
@@ -15,11 +9,7 @@ export class User {
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  user: Observable<firebase.User>;
-
-  constructor(public afAuth: AngularFireAuth, private router: Router) {
-    this.user = afAuth.authState;
-  }
+  constructor(public afAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit() {
   }

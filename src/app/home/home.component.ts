@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { MdDialog } from '@angular/material';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
    */
   public loading = true;
 
-  constructor(db: AngularFireDatabase, private dialog: MdDialog, afAuth: AngularFireAuth) {
+  constructor(private dialog: MdDialog, private router: Router, db: AngularFireDatabase, afAuth: AngularFireAuth) {
     afAuth.authState.flatMap((user) => {
       this.courses = db.list(`/users/${user.uid}/courses`);
       return this.courses;
@@ -48,5 +49,16 @@ export class HomeComponent implements OnInit {
    */
   createCourse() {
     this.dialog.open(AddCourseDialogComponent);
+  }
+
+  /**
+   * Routes the user to the details screen for the given course.
+   *
+   * @param {string} course the course id
+   * @returns Promise that resolves when the routing is finished.
+   * @memberof HomeComponent
+   */
+  goToCourse(course: string) {
+    return this.router.navigate(['/course', course]);
   }
 }
