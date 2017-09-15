@@ -7,9 +7,8 @@
       }
     },
     "courses": {
-      ".read": "auth != null",
       "$course_id": {
-        ".read": "auth != null",
+        ".read": "data.child('members').child(auth.uid).exists()",
         ".write": "!data.exists() || data.child('members').child(auth.uid).exists()"
       }
     }

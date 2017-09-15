@@ -29,11 +29,12 @@ import { CourseComponent } from './course/course.component';
 import { LoginComponent } from './login/login.component';
 import { environment } from '../environments/environment';
 import { AuthGuard } from './auth.guard';
+import { CourseMemberGuard } from './course-member.guard';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'course/:id', component: CourseComponent, canActivate: [AuthGuard] },
+  { path: 'course/:id', component: CourseComponent, canActivate: [AuthGuard, CourseMemberGuard] },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];
@@ -70,7 +71,7 @@ const appRoutes: Routes = [
     MdProgressBarModule,
     MdSnackBarModule,
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, CourseMemberGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
